@@ -1,0 +1,8 @@
+[package]
+name = "water2d"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pyo3 = "*"
+blue_engine = "*"
