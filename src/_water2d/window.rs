@@ -1,10 +1,6 @@
 // window.rs - Part of Water2D.
 
-use blue_engine::{
-    header::{
-        WindowDescriptor, PowerPreference
-    }
-};
+use crate::_water2d::engine::WindowSettings;
 
 use pyo3::prelude::*;
 
@@ -23,7 +19,7 @@ pub struct Window {
     pub resizable: bool,
 
     #[pyo3[get]]
-    _window: WindowDescriptor
+    _window: WindowSettings,
 }
 
 #[pymethods]
@@ -31,19 +27,19 @@ impl Window {
     #[new]
     pub fn new(title: String, width: u32, height: u32, resizable: bool) -> Window {
         Window {
-            title: title,
+            title: title.clone(),
             window_width: width,
             window_height: height,
             resizable: resizable,
 
-            _window: WindowDescriptor {
+            _window: WindowSettings {
                 width: width,
                 height: height,
                 title: Box::leak(title.into_boxed_str()),
                 decorations: true,
                 resizable: resizable,
-                power_preference: PowerPreference::LowPower // Let user choose.
-            }
+                //power_preference: PowerPreference::LowPower, // Let user choose.
+            },
         }
     }
 }
